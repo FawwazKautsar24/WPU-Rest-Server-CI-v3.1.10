@@ -11,12 +11,16 @@ class Mahasiswa extends REST_Controller
     {
         parent::__construct();
         $this->load->model('Mahasiswa_model', 'mahasiswa');
+
+        // limit setiap nama key/access_token, request method, dan jam
+        $this->methods['index_get']['limit'] = 10;
     }
     
     // restfull endpoints berdasarkan request method
     public function index_get()
     {
         $this->get('id');
+        
         if($id === null){
             $mahasiswa = $this->mahasiswa->getMahasiswa();
         }else{
