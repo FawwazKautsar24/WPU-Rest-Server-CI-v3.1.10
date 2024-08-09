@@ -62,4 +62,51 @@ class Mahasiswa extends REST_Controller
             }
         }
     }
+
+    public function index_post()
+    {
+        // asumsi data telah bersih dan valid di clint (FE)
+        $data = [
+            'nrp' => $this->post('nrp'),
+            'nama' => $this->post('nama'),
+            'email' => $this->post('email'),
+            'jurusan' => $this->post('jurusan')
+        ];
+
+        if($this->mahasiswa->createMahasiswa($data) > 0){
+            $this->response([
+                'status' => true,
+                'message' => 'new mahasiswa has been created.'
+            ], REST_Controller::HTTP_CREATED);
+        }else{
+            $this->response([
+                'status' => false,
+                'message' => 'failed to create new data!'
+            ], REST_Controller::HTTP_BAD_REQUEST);
+        }
+    }
+
+    public function index_put()
+    {
+        $id = $this->put('id');
+
+        $data = [
+            'nrp' => $this->put('nrp'),
+            'nama' => $this->put('nama'),
+            'email' => $this->put('email'),
+            'jurusan' => $this->put('jurusan')
+        ];
+
+        if($this->mahasiswa->updateMahasiswa($data, $id) > 0){
+            $this->response([
+                'status' => true,
+                'message' => 'data mahasiswa has been updated.'
+            ], REST_Controller::HTTP_NO_CONTENT);
+        }else{
+            $this->response([
+                'status' => false,
+                'message' => 'failed to update data!'
+            ], REST_Controller::HTTP_BAD_REQUEST);
+        }
+    }
 }
