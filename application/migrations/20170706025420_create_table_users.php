@@ -21,12 +21,12 @@ class Migration_create_table_users extends CI_Migration {
 		$fields = array(
 			'id'         => [
 				'type'           => 'INT(11)',
-				'auto_increment' => true,
-				'unsigned'       => true,
+				'auto_increment' => TRUE,
+				'unsigned'       => TRUE,
 			],
 			'email'      => [
 				'type'   => 'VARCHAR(255)',
-				'unique' => true,
+				'unique' => TRUE,
 			],
 			'password'   => [
 				'type' => 'VARCHAR(64)',
@@ -42,8 +42,8 @@ class Migration_create_table_users extends CI_Migration {
 			],
 		);
 		$this->dbforge->add_field($fields);
-		$this->dbforge->add_key('id', true);
-		$this->dbforge->create_table($this->table, true);
+		$this->dbforge->add_key('id', TRUE);
+		$this->dbforge->create_table($this->table, TRUE);
 
 		/*for ($i = 1; $i <= 100; $i++)
 		{

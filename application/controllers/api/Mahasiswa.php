@@ -13,13 +13,13 @@ class Mahasiswa extends REST_Controller
         $this->load->model('Mahasiswa_model', 'mahasiswa');
 
         // limit setiap nama key/access_token, request method, dan jam
-        $this->methods['index_get']['limit'] = 10;
+        $this->methods['index_get']['limit'] = 25;
     }
     
     // restfull endpoints berdasarkan request method
     public function index_get()
     {
-        $this->get('id');
+        $id = $this->get('id');
         
         if($id === null){
             $mahasiswa = $this->mahasiswa->getMahasiswa();
@@ -105,7 +105,7 @@ class Mahasiswa extends REST_Controller
             $this->response([
                 'status' => true,
                 'message' => 'data mahasiswa has been updated.'
-            ], REST_Controller::HTTP_NO_CONTENT);
+            ], REST_Controller::HTTP_OK);
         }else{
             $this->response([
                 'status' => false,
